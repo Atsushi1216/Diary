@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ログイン</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div>
+	<form th:action="@{/postLogin}" th:object="${formModel}" method="post">
+		<table>
+			<tr>
+				<th>メールアドレス</th>
+				<td>
+					<input type="email" name="email" />
+				</td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td>
+					<input type="password" name="password" />
+				</td>
+			</tr>
+		</table>
+		<div>
+			<input type="submit" value="ログイン"/>
+		</div>
+	</form>
+</div>
 
 </body>
 </html>

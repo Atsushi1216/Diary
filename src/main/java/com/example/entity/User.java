@@ -14,6 +14,7 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@Column(name="id")
+	// ユニークキー生成のためGeneratedValueを使用
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
