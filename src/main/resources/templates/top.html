@@ -2,9 +2,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>あなただけのDairy</title>
 </head>
 <body>
+<h3>ここはあなただけの秘密の空間</h3>
+<h4>今日の嫌なことすべて吐き出しちゃいなよ</h4>
+<div>
+	<th:block th:each="diarys : ${diarys}">
+		<table>
+			<tr>
+				<th>タイトル</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<Td><th:block th:text="${diarys.title}"></th:block></Td>
+			</tr>
+		</table>
+</div>
+<div>
+	<form th:action="@{/postDiary}" th:object="${loginUser}" method="post">
+		<table>
+			<tr>
+				<th>タイトル</th>
+				<td>
+					<input type="text" name="title">
+				</td>
+			</tr>
+			<tr>
+				<th>内容</th>
+				<td>
+					<input type="text" name="content">
+				</td>
+			</tr>
+			<!-- <tr hidden>
+				<th>タイトル</th>
+				<td>
+					<input type="text" name="user_id" th:value="${loginUser.userId}">
+				</td>
+			</tr> -->
+		</table>
+		<input type="submit" value="投稿" />
+	</form>
+</div>
+
 
 </body>
 </html>
