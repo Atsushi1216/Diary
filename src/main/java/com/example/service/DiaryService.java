@@ -15,7 +15,7 @@ public class DiaryService {
 	DiaryRepository diaryRepository;
 
 	// 日記の全件取得
-	public List<Diary> findAll(Diary diary) {
+	public List<Diary> findAllDiary() {
 		return diaryRepository.findAll();
 	}
 

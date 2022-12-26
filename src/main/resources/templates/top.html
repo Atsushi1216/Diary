@@ -16,9 +16,10 @@
 				<th></th>
 			</tr>
 			<tr>
-				<Td><th:block th:text="${diarys.title}"></th:block></Td>
+				<td><th:block th:text="${diarys.title}"></th:block></td>
 			</tr>
 		</table>
+	</th:block>
 </div>
 <div>
 	<form th:action="@{/postDiary}" th:object="${loginUser}" method="post">

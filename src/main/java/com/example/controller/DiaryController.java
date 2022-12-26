@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -29,7 +28,8 @@ public class DiaryController {
 	@GetMapping("/")
 	public ModelAndView top() {
 		ModelAndView mav = new ModelAndView();
-		List<Diary> diarys = new ArrayList<Diary>();
+		
+		List<Diary> diarys = diaryService.findAllDiary();
 		User user = (User) session.getAttribute("loginUser");
 
 		// user情報がなければログイン画面へ遷移
@@ -49,7 +49,6 @@ public class DiaryController {
 	public ModelAndView postDiary(@ModelAttribute("loginUser") Diary diary) {
 
 		ModelAndView mav =new ModelAndView();
-
 		User user = (User) session.getAttribute("loginUser");
 
 		// user情報がなければログイン画面へ遷移
@@ -69,9 +68,8 @@ public class DiaryController {
 //		mav.addObject("currentTime", currentTime);
 
 
-
 		diaryService.saveDiary(diary);
 		mav.setViewName("/top");
-		return new ModelAndView("/");
+		return new ModelAndView("/top");
 	}
 }
