@@ -1,5 +1,8 @@
 package com.example.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.entity.Diary;
@@ -72,4 +77,45 @@ public class DiaryController {
 		mav.setViewName("/top");
 		return new ModelAndView("/top");
 	}
+	
+	// 日記編集画面
+	@GetMapping("/edit/{id}")
+	public ModelAndView editContent(@PathVariable Integer id) {
+		ModelAndView mav = new ModelAndView();
+		
+		User user = (User) session.getAttribute("loginUser");
+		
+		if (user == null) {
+			mav.setViewName("/login");
+			return mav;
+		}
+		
+		Diary diary = diaryService.editDiary(id);
+		
+		mav.addObject("formModel", diary);
+		mav.setViewName("/edit");
+		return mav;
+	}
+	
+	// 日記編集処理
+	@PutMapping("/postEdit/{id}")
+	public ModelAndView postEditContent(@PathVariable Integer id, @ModelAttribute("formModel") Diary diary) {
+		User user = (User) session.getAttribute("loginUser");
+		
+		diary.setUserId(user.getId());		
+		diary.setId(id);
+		
+		Timestamp update_date = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+	
+		update_date = new Timestamp(date.getTime());
+		diary.setUpdatedDate(update_date);
+		
+		diaryService.saveDiary(diary);
+		return new ModelAndView("redirect:/");
+		
+	}
+	
+	
 }

@@ -23,5 +23,16 @@ public class DiaryService {
 	public void saveDiary(Diary diary) {
 		diaryRepository.save(diary);
 	}
+	
+	// 1件取得
+	public Diary editDiary(Integer id) {
+		Diary diarys = diaryRepository.findById(id).orElse(null);
+		return diarys;
+	}
+	
+	public Diary findById(Integer id) {
+		return diaryRepository.findById(id).orElse(null);
+
+	}
 
 }

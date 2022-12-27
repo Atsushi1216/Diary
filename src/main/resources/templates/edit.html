@@ -2,9 +2,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>日記編集</title>
 </head>
 <body>
-
+	<form th:action="@{/postEdit/{id}(id=${formModel.id})}" th:object="${formModel}" th:method="put">
+		<table>
+			<tr>
+				<th>タイトル</th>
+				<td>
+					<input type="text" name="title" th:value="${formModel.title}">
+				</td>
+			</tr>
+			<tr>
+				<th>内容</th>
+				<td>
+					<input type="text" name="content" th:value="${formModel.content}">
+				</td>
+			</tr>
+			
+		</table>
+	<input type="submit" value="投稿" /> 	
+	</form>
 </body>
 </html>
