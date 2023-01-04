@@ -34,5 +34,9 @@ public class DiaryService {
 		return diaryRepository.findById(id).orElse(null);
 
 	}
+	
+	public void deleteDiary(Integer id) {
+		diaryRepository.deleteById(id);
+	}
 
 }

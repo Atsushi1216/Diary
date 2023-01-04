@@ -11,16 +11,19 @@
 		<table>
 			<tr>
 				<th>タイトル</th>
-				<th></th>
+				<th>削除</th>
 				<th></th>
 			</tr>
 			<th:block th:each="diarys : ${diarys}">
 			<tr>
 				<th>
-				<a th:href="@{/edit/{id}(id=${diarys.id})}"><th:block th:text="${diarys.title}" ></th:block></th:block></a></th>
-				<th></th>
+				<a th:href="@{/edit/{id}(id=${diarys.id})}"><th:block th:text="${diarys.title}" ></th:block></a></th>
+				<th><form th:action="@{/delete/{id}(id=${diarys.id})}" th:method="delete">
+							<input type="submit" value="削除" class="delete" >
+						</form></th>
 				<th></th>
 			</tr>
+			</th:block>
 		</table>
 	</th:block>
 </div>
