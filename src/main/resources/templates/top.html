@@ -8,16 +8,18 @@
 <h3>ここはあなただけの秘密の空間</h3>
 <h4>今日の嫌なことすべて吐き出しちゃいなよ</h4>
 <div>
-	<th:block th:each="diarys : ${diarys}">
 		<table>
 			<tr>
 				<th>タイトル</th>
 				<th></th>
 				<th></th>
 			</tr>
+			<th:block th:each="diarys : ${diarys}">
 			<tr>
-				<td><th:block th:text="${diarys.title}" ></th:block>
-				<a th:href="@{/edit/{id}(id=${diarys.id})}"></th:block></a></td>
+				<th>
+				<a th:href="@{/edit/{id}(id=${diarys.id})}"><th:block th:text="${diarys.title}" ></th:block></th:block></a></th>
+				<th></th>
+				<th></th>
 			</tr>
 		</table>
 	</th:block>
