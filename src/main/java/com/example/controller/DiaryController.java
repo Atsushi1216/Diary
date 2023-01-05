@@ -118,6 +118,22 @@ public class DiaryController {
 		
 	}
 	
+	// 日記詳細画面
+	@GetMapping("/detail/{id}")
+	public ModelAndView detailContent(@PathVariable Integer id) {
+		User user = (User) session.getAttribute("loginUser");
+		ModelAndView mav = new ModelAndView();
+		if (user == null) {
+			mav.setViewName("/login");
+			return mav;
+		}
+		Diary diarys = diaryService.findById(id);
+		mav.addObject("diarys", diarys);
+		mav.setViewName("/detail");
+		return mav;
+	}
+	
+	
 	// 削除機能
 	@DeleteMapping("/delete/{id}")
 	public ModelAndView deleteContent(@PathVariable Integer id) {

@@ -16,7 +16,7 @@
 			</tr>
 			<th:block th:each="diarys : ${diarys}">
 			<tr>
-				<th><th:block th:text="${diarys.title}" ></th:block></th>		
+				<th><a th:href="@{/detail/{id}(id=${diarys.id})}"> <th:block th:text="${diarys.title}"></th:block></a></th>	
 				<th>
 					<form th:action="@{/delete/{id}(id=${diarys.id})}" th:method="delete">
 						<input type="submit" value="削除" class="delete" >

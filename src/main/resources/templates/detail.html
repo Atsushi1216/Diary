@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>詳細</title>
+</head>
+<body>
+	<th:block th:each="diarys : ${diarys}">
+			<tr>
+				<th><th:block th:text="${diarys.title}" ></th:block></th></br>	</br>
+				<th><th:block th:text="${diarys.content}" ></th:block></th> </br>	</br>
+				<th>
+					<a th:href="@{/edit/{id}(id=${diarys.id})}">
+						<button	type="button" class="btn btn-link">編集</button> </br></br>
+					</a>
+				</th>
+				<th>
+					<form th:action="@{/delete/{id}(id=${diarys.id})}" th:method="delete">
+						<input type="submit" value="削除" class="delete" >
+					</form>
+				</th>
+			</tr>
+			</th:block>
+	</th:block>
+</body>
+</html>
