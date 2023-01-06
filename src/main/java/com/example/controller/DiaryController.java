@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +37,12 @@ public class DiaryController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<Diary> diarys = diaryService.findAllDiary();
+		List<String> errorMessages = new ArrayList<String>();
 		User user = (User) session.getAttribute("loginUser");
 
 		// user情報がなければログイン画面へ遷移
 		if (user == null) {
+			session.setAttribute("errorMessages", errorMessages);
 			mav.setViewName("/login");
 			return mav;
 		}
@@ -55,10 +58,12 @@ public class DiaryController {
 	public ModelAndView postDiary(@ModelAttribute("loginUser") Diary diary) {
 
 		ModelAndView mav =new ModelAndView();
+		List<String> errorMessages = new ArrayList<String>();
 		User user = (User) session.getAttribute("loginUser");
 
 		// user情報がなければログイン画面へ遷移
 		if (user == null) {
+			session.setAttribute("errorMessages", errorMessages);
 			mav.setViewName("/login");
 			return mav;
 		}
@@ -83,10 +88,11 @@ public class DiaryController {
 	@GetMapping("/edit/{id}")
 	public ModelAndView editContent(@PathVariable Integer id) {
 		ModelAndView mav = new ModelAndView();
-		
+		List<String> errorMessages = new ArrayList<String>();
 		User user = (User) session.getAttribute("loginUser");
 		
 		if (user == null) {
+			session.setAttribute("errorMessages", errorMessages);
 			mav.setViewName("/login");
 			return mav;
 		}
@@ -121,9 +127,11 @@ public class DiaryController {
 	// 日記詳細画面
 	@GetMapping("/detail/{id}")
 	public ModelAndView detailContent(@PathVariable Integer id) {
+		List<String> errorMessages = new ArrayList<String>();
 		User user = (User) session.getAttribute("loginUser");
 		ModelAndView mav = new ModelAndView();
 		if (user == null) {
+			session.setAttribute("errorMessages", errorMessages);
 			mav.setViewName("/login");
 			return mav;
 		}
